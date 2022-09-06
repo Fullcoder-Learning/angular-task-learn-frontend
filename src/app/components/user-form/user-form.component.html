@@ -1,0 +1,15 @@
+<div class="container mt-4 text-center">
+    <div class="row">
+        <div class="col">
+            <h3>Datos de usuario</h3>
+            <hr />
+            <img src={{avatar}} class="avatarEdit rounded img-thumbnail img-fluid"  alt="Avatar" />
+            <input type="file" class="form-control mt-3" placeholder="Subir avatar" [(ngModel)]="user.file" />
+            <input type="text" class="form-control mt-3" placeholder="Nombre" [(ngModel)]="user.name" />   
+            <input type="text" class="form-control mt-3" placeholder="Apellidos" [(ngModel)]="user.lastname" />  
+            <input type="text" class="form-control mt-3" placeholder="Email" [(ngModel)]="user.email" />  
+            <input type="text" class="form-control mt-3" placeholder="nueva contraseña (dejar en blanco para no cambiar)" [(ngModel)]="user.password" /> 
+            <input type="button" class="btn btn-success form-control mt-3" value="Actualizar datos" (click)="updateUser()" />
+        </div>
+    </div>
+</div>

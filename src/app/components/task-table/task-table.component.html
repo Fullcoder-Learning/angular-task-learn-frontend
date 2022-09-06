@@ -1,0 +1,41 @@
+<div class="text-center container">
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha creación</th>
+                <th scope="col">Finalizada</th>
+                <th scope="col">Fecha Finalización</th>
+                <th scope="col">Operaciones</th>
+            </tr>
+        </thead>
+        <tbody class="text-start">
+            <tr *ngFor="let data of dummyData">
+                <td>{{data.name}}</td>
+                <td>{{data.description}}</td>
+                <td>{{data.date_created}}</td>
+                <td>
+                    <span *ngIf="data.is_complete == true">Si</span>
+                    <span *ngIf="data.is_complete == false">No</span>
+                </td>
+                <td><span *ngIf="data.date_finish != null">{{data.date_finish}}</span></td>
+                <td class="text-center">
+                    <button (click)="getTask(data._id, data.name)" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#finishModal">finalizar tarea</button>
+                    <button (click)="getTask(data._id, data.name)" class="btn btn-sm btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar tarea</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Crear nueva fila con el formulario de crear tareas: -->
+    <div class="row text-center align-items-end">
+            <div class="col-md-5"></div>
+            <!-- Con ngModel no se usa form sino da fallo -->
+            <!-- Cargar los datos del input con ngModel y crear función para procesarlos al hacer click en la lista de arriba -->
+            <input [(ngModel)]="task.name"  class="col me-2 form-control form-sm" type="text" placeholder="Título"/>
+            <input [(ngModel)]="task.description" class="col me-2 form-control" type="text" placeholder="Descripción" />
+            <input (click)="createTask()" class="col me-2 form-control btn btn-success" type="button" value="Crear tarea" />
+    </div>
+    <app-finish-task-modal [taskId]="taskId" [taskName]="taskName" ></app-finish-task-modal>
+    <app-delete-task-modal [taskId]="taskId" [taskName]="taskName" ></app-delete-task-modal>
+</div>
