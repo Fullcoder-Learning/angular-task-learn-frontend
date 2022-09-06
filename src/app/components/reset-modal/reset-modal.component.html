@@ -1,0 +1,19 @@
+<div class="modal fade" id="resetPassword" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Resetear contraseña</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col text-center">
+                    <input type="email" [(ngModel)]="restoreData.email" class="form-control mt-3" placeholder="Email" />  
+                    <input type="button" (click)="restore()" class="btn btn-success form-control mt-3" value="Enviar email" data-bs-dismiss="modal" />
+                    <small>Recibirás un email que te llevará donde resetear tu contraseña</small>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="bodystyle text-center" cz-shortcut-listen="true">
+    <div class="form-signin text-center">
+        <h1>Por favor inicia sesión</h1>
+        <div class="form-floating">
+            <input type="email" [(ngModel)]="loginData.email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+            <label htmlFor="floatingInput">Email</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" [(ngModel)]="loginData.password" class="form-control" id="floatingPassword" placeholder="Password" />
+            <label htmlFor="floatingPassword">Contraseña</label>
+        </div>
+        <div class="mb-3">
+        <button type="button" class="cursor" data-bs-toggle="modal" data-bs-target="#registerUser">Crear usuario</button>
+        </div>
+        <div class="mb-3">
+        <!-- actualizar el botón para resetear password: -->
+        <button type="button" class="cursor" data-bs-toggle="modal" data-bs-target="#resetPassword">¿has olvidado la contraseña?</button>
+        </div>
+        <button (click)="login()" class="w-100 btn btn-lg btn-primary" type="button">Iniciar sesión</button>
+    </div>
+    <app-register-modal></app-register-modal>
+    <!-- Cargar componente modal: -->
+    <app-reset-modal></app-reset-modal>
+</div>
