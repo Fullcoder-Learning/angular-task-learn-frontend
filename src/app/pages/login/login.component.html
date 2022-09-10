@@ -18,7 +18,8 @@
         </div>
         <button (click)="login()" class="w-100 btn btn-lg btn-primary" type="button">Iniciar sesión</button>
     </div>
-    <app-register-modal></app-register-modal>
-    <!-- Cargar componente modal: -->
-    <app-reset-modal></app-reset-modal>
 </div>
+<app-register-modal></app-register-modal>
+<app-reset-modal></app-reset-modal>ç
+<!-- Añadir el componente alert: -->
+<app-alert [alertError]="loginAlertError" [alertMessage]="loginMessageError"></app-alert>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-// importar elementos del router para recuperar parametros:
 import {ActivatedRoute,Params} from "@angular/router"
-// importar el router para redirigir:
 import {Router} from '@angular/router';
+// importar user service:
+import { UserService } from 'src/app/services/user.service';
+// importar la interface:
+import { ResetPassword } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,25 +12,26 @@ import {Router} from '@angular/router';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  // crear modelo de datos:
-  resetData: any = {
+
+  resetData: ResetPassword = {
     newPassword: "",
     repitePassword: ""
   }
 
-  // crear atributos para recibir parametros:
   id: string = "";
   token: string = "";
 
-  // crear un boolean para comprobar la alerta y otro para la contraseña:
-  alert: boolean = false;
+  // vamos a cambiar el alert de este componente por el alert externo:
+  resetAlertSuccess: boolean = false;
+  resetAlertError: boolean = false;
+  resetAlertMessage: string = "";
+
   match: boolean = true;
 
-  // crear objeto para recibir parametros y el router:
-  constructor(private _activeRouter: ActivatedRoute, private router: Router) { }
+  // construir objeto del user service:
+  constructor(private _activeRouter: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    // recuperar parametros recibidos por la url:
     this._activeRouter.params.subscribe((params: Params) =>{
       this.id = params['id'];
       this.token = params['token'];
@@ -39,13 +42,31 @@ export class ResetPasswordComponent implements OnInit {
     if(this.resetData.newPassword !== this.resetData.repitePassword){
       this.match = false;
     }else{
-      console.log(this.resetData);
-      this.match = true;
-      this.alert = true;
-      window.setTimeout(()=>{
-          // si todo va bien redirigir a login:
+      // subscribirse al servicio y enviar datos:
+      this.userService.resetPassword(this.resetData, this.id, this.token)
+      .subscribe((res: object) => {
+        // devolver una respuesta por consola para hacer pruebas:
+        console.log(res);
+        // cambiar estado del alert:
+        this.resetAlertSuccess = true;
+        
+        this.match = true;
+        // cambiar mensaje de alerta:
+        this.resetAlertMessage = "La contraseña ha sido reestablecida con éxito. Ya puedes iniciar sesión";
+        // establecer un temporizador para quitar mensaje alerta:
+        window.setTimeout(()=>{
+          this.resetAlertSuccess = false;
           this.router.navigate(['login']);
-      }, 3000);
+        }, 3000);
+      }, (err: object) => {
+        console.log(err);
+        this.resetAlertError =  true;
+        this.resetAlertMessage = "Error, el email no existe.";
+        window.setTimeout(()=>{
+          this.resetAlertError = false;
+        }, 3000);
+      });
+      this.match = true;
     }
   }
 

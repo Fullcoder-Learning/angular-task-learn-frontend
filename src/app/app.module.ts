@@ -16,6 +16,10 @@ import { RegisterModalComponent } from './components/register-modal/register-mod
 import { ResetModalComponent } from './components/reset-modal/reset-modal.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { Error404Component } from './pages/error404/error404.component';
+// cargamos el httpclientmodule:
+import {HttpClientModule} from '@angular/common/http';
+import { AlertComponent } from './components/alert/alert.component';
+import { DeleteUserModalComponent } from './components/delete-user-modal/delete-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +35,15 @@ import { Error404Component } from './pages/error404/error404.component';
     RegisterModalComponent,
     ResetModalComponent,
     ResetPasswordComponent,
-    Error404Component
+    Error404Component,
+    AlertComponent,
+    DeleteUserModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule // importar modulo de formularios
+    FormsModule,
+    HttpClientModule // importar modulo para peticiones rest
   ],
   providers: [],
   bootstrap: [AppComponent]
