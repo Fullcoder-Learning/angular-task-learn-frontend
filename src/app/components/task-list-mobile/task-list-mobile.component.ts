@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
 import { Task, TaskData } from 'src/app/interfaces/task';
 
 @Component({
-  selector: 'app-task-table',
-  templateUrl: './task-table.component.html',
-  styleUrls: ['./task-table.component.css']
+  selector: 'app-task-list-mobile',
+  templateUrl: './task-list-mobile.component.html',
+  styleUrls: ['./task-list-mobile.component.css']
 })
-export class TaskTableComponent implements OnInit {
+export class TaskListMobileComponent implements OnInit {
   @Input() tasks: Array<TaskData> = []
 
   @Input() taskForUpdate: TaskData = {
@@ -25,31 +25,39 @@ export class TaskTableComponent implements OnInit {
   }
 
   @Output() taskState: EventEmitter<any> = new EventEmitter();
+
+  taskId: string = "";
+  taskName: string = "";
   
   isUpdateTask: boolean = false;
-  
+
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-    
   }
 
-  getTask(id:string, name:string): void {
-    this.taskState.emit({taskId: id, taskName: name});
+  getTask(): void {
+    this.taskState.emit({taskId: this.taskForUpdate._id, taskName: this.taskForUpdate.name});
   }
 
-  editTask(taskData:TaskData){
+  // Editamos la función que recoge los datos de la tarea a actualizar creando una nueva:
+  selectTask(taskData:TaskData){
     this.taskForUpdate = taskData;
+  }
+
+  editTask(){
     this.isUpdateTask = true;
   }
 
   updateTask(){
-
     if(this.isUpdateTask == true){
-      this.taskService.updateTask(this.taskForUpdate, this.taskForUpdate._id)
+      this.task.name = this.taskForUpdate.name;
+      this.task.description = this.taskForUpdate.description;
+      this.taskId = this.taskForUpdate._id;
+      this.taskService.updateTask(this.task, this.taskId)
       .subscribe((res: any) => {
         this.tasks.map(task =>{
-          if(task._id === this.taskForUpdate._id){
+          if(task._id === this.taskId){
             task.name = res.task.name;
             task.description = res.task.description;
             this.isUpdateTask = false;
@@ -58,15 +66,14 @@ export class TaskTableComponent implements OnInit {
       },(err: object) =>{
         console.log(err);
       })
-      
     }
 
     
   }
 
   cancelUpdate(): void{
-    this.task.name = "";
-    this.task.description = "";
+    this.taskForUpdate.name = "";
+    this.taskForUpdate.description = "";
     this.isUpdateTask = false;
   }
 

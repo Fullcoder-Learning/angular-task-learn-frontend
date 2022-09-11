@@ -11,20 +11,19 @@
             </tr>
         </thead>
         <tbody class="text-start">
-            <!-- añadimos una nueva fila con hueco para una tarea con los valores por defecto de la tarea recuperada: -->
             <tr *ngIf="isUpdateTask == true; else taskList">
                 <td>
-                    <input [(ngModel)]="task.name" class="col me-2 form-control form-sm" type="text" placeholder="Título" />
+                    <input [(ngModel)]="taskForUpdate.name" class="col me-2 form-control form-sm" type="text" placeholder="Título" />
                 </td>
                 <td>
-                    <input [(ngModel)]="task.description" class="col me-2 form-control" type="text" placeholder="Descripción" />
+                    <input [(ngModel)]="taskForUpdate.description" class="col me-2 form-control" type="text" placeholder="Descripción" />
                 </td>
-                <td>{{taskCreated|date: 'dd/MM/yyyy hh:mm'}}</td>
+                <td>{{taskForUpdate.date_created|date: 'dd/MM/yyyy hh:mm'}}</td>
                 <td>
-                    <span *ngIf="taskIsComplete == true">Si</span>
-                    <span *ngIf="taskIsComplete == false">No</span>
+                    <span *ngIf="taskForUpdate.is_complete == true">Si</span>
+                    <span *ngIf="taskForUpdate.is_complete == false">No</span>
                 </td>
-                <td><span *ngIf="taskFinish != null">{{taskFinish|date: 'dd/MM/yyyy hh:mm'}}</span></td>
+                <td><span *ngIf="taskForUpdate.date_finish != null">{{taskForUpdate.date_finish|date: 'dd/MM/yyyy hh:mm'}}</span></td>
                 <td class="text-center">
                     <button type="button" (click)="updateTask()" class="btn btn-sm btn-success me-2 mb-1">Guardar</button>
                     <button type="button" (click)="cancelUpdate()" class="btn btn-sm btn-primary me-2 mb-1" >Cancelar</button>
@@ -66,6 +65,4 @@
             </ng-template>
         </tbody>
     </table>
-    <app-finish-task-modal [taskId]="taskId" [taskName]="taskName" (task)="updateTask($event)"></app-finish-task-modal>
-    <app-delete-task-modal [taskId]="taskId" [taskName]="taskName" (task)="updateTask($event)"></app-delete-task-modal>
 </div>

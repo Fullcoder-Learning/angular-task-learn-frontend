@@ -20,6 +20,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { DeleteUserModalComponent } from './components/delete-user-modal/delete-user-modal.component';
+import { TaskListMobileComponent } from './components/task-list-mobile/task-list-mobile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DeleteUserModalComponent } from './components/delete-user-modal/delete-
     ResetPasswordComponent,
     Error404Component,
     AlertComponent,
-    DeleteUserModalComponent
+    DeleteUserModalComponent,
+    TaskListMobileComponent
   ],
   imports: [
     BrowserModule,

@@ -11,5 +11,5 @@ export interface TaskData {
     date_created: Date,
     name: string,
     description: string,
-    owner: string
+    owner?: string
 }
