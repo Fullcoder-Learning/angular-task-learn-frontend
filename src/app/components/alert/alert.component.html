@@ -1,0 +1,18 @@
+<div class="alert-group">
+    <div *ngIf="alertSuccess == true; else success" class="alert alert-success alert-group" role="alert">
+        {{alertMessage}}
+    </div>
+    <ng-template #success>
+        <div class="alert alert-success fade alert-group" role="alert">
+            {{alertMessage}}
+        </div>
+    </ng-template>
+    <div *ngIf="alertError == true; else error" class="alert alert-danger alert-group" role="alert">
+        {{alertMessage}}
+    </div>
+    <ng-template #error>
+        <div class="alert alert-danger fade alert-group" role="alert">
+            {{alertMessage}}
+        </div>
+    </ng-template>
+</div>

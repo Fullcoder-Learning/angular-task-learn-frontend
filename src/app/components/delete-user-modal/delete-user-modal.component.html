@@ -1,0 +1,19 @@
+<div class="modal fade" id="deleteUserModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Cerrar cuenta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Se va a eliminar su cuenta de usuario junto a todas sus tareas</p>
+            <p>Esta operación no tiene retorno, ¿proceder?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <!-- añadir función al botón: -->
+            <button type="button" (click)="delete()" class="btn btn-danger" data-bs-dismiss="modal">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>

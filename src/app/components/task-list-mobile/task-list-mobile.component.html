@@ -1,0 +1,46 @@
+<div>
+    <div class="list-group ms-1 me-1 mt-3">
+        <div *ngIf="isUpdateTask == true; else taskList" class="list-group-item list-group-item-action" aria-current="true" >
+            <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><input name="name" [(ngModel)]="taskForUpdate.name" class="col me-2 form-control form-sm" type="text" placeholder="Título" /></h5>
+            <small>{{taskForUpdate.date_created|date: 'dd/MM/yyyy hh:mm'}}</small>
+            </div>
+            <p class="mb-1"><input name="description" [(ngModel)]="taskForUpdate.description" class="col me-2 form-control" type="text" placeholder="Descripción" /></p>
+            <small *ngIf="taskForUpdate.is_complete != null; else todo" >Finalizada: {{taskForUpdate.date_finish|date: 'dd/MM/yyyy hh:mm'}}</small>
+            <ng-template #todo><small>En curso</small></ng-template>
+        </div>    
+        <ng-template #taskList>
+            <div *ngFor="let data of tasks" >
+                <div class="list-group-item list-group-item-action" aria-current="true" (click)="selectTask(data)" >
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{data.name}}</h5>
+                        <small>{{data.date_created|date: 'dd/MM/yyyy hh:mm'}}</small>
+                    </div>
+                    <p class="mb-1">{{data.description}}</p>
+                    <small *ngIf="data.date_finish != null; else todo" >Finalizada: {{data.date_finish|date: 'dd/MM/yyyy hh:mm'}}</small>
+                    <ng-template #todo><small>En curso</small></ng-template>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action" aria-current="true" >
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><input name="name" [(ngModel)]="task.name" class="col me-2 form-control form-sm" type="text" placeholder="Título" /></h5>
+                    <small>NUEVA TAREA</small>
+                </div>
+                <p class="mb-1"><input name="description" [(ngModel)]="task.description" class="col me-2 form-control" type="text" placeholder="Descripción" /></p>
+                <small><button type="button" class="btn btn-success" (click)="createTask()" >crear tarea</button></small>
+            </div>
+        </ng-template>
+    </div>
+    <br /><br /><br /><br />
+    <nav class="navbar fixed-bottom navbar-dark bg-dark" >
+        <div class="container-fluid text-center">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button *ngIf="isUpdateTask == false"  type="button" class="btn btn-warning" (click)="editTask()" >Editar</button>
+                <button *ngIf="isUpdateTask == false" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#finishModal" (click)="getTask()">Finalizar</button>
+                <button *ngIf="isUpdateTask == false" type="button" class="btn btn-danger" data-bs-toggle="modal" (click)="getTask()" data-bs-target="#deleteModal">Eliminar</button>
+                <button *ngIf="isUpdateTask == true" type="button" class="btn btn-success"  (click)="updateTask()">Guardar cambios</button>
+                <button *ngIf="isUpdateTask == true" type="button" class="btn btn-secondary" (click)="cancelUpdate()" >Cerrar</button>
+            </div>
+        </div>
+    </nav>
+</div>

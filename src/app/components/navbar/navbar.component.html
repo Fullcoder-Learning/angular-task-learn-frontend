@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="col-md-11 align-items-start ms-2" >
+        <!-- cambiar href por routerLink -->
+        <a routerLink="/" class="navbar-brand">Task Learn</a>
+    </div>
+    
+    <ul class="navbar-nav mb-2 mb-lg-0 col-md-1 align-items-end me-3">
+        <li class="nav-item align-items-end">
+            <!-- cambiar href por routerLink -->
+            <a routerLink="/users" class="nav-link text-center">
+                <!-- cargamos el atributo avatar en la ruta de la imagen -->
+                <img class="avatar rounded img-thumbnail img-fluid" src={{avatar}} alt="foto" />
+                <div class="col">
+                    <small>Usuario</small>
+                </div>
+            </a>
+        </li>
+    </ul>
+</nav>

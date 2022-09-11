@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+<!-- ocultar la tabla cuando se encuentre en dispositivos móviles: -->
+<div class="d-none d-sm-block">
+    <app-task-table [tasks]="tasks" [taskForUpdate]="taskForUpdate" [task]="task" (taskState)="getTask($event)"></app-task-table>
+</div>
+<div class="d-sm-none">
+    <app-task-list-mobile [tasks]="tasks" [taskForUpdate]="taskForUpdate" [task]="task" (taskState)="getTask($event)"></app-task-list-mobile>
+</div>
+<!-- añadir aquí los componentes de modal: -->
+<app-finish-task-modal [taskId]="taskId" [taskName]="taskName" (task)="updateTask($event)"></app-finish-task-modal>
+<app-delete-task-modal [taskId]="taskId" [taskName]="taskName" (task)="updateTask($event)"></app-delete-task-modal>
